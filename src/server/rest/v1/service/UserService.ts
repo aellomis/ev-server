@@ -118,7 +118,8 @@ export default class UserService {
     let withBillingChecks = true ;
     const chargingStation = await UtilsService.checkAndGetChargingStationAuthorization(req.tenant, req.user, filteredRequest.ChargingStationID, Action.READ,
       action, null, { withSiteArea: true });
-    if (!chargingStation.siteArea.accessControl) {
+
+    if (!chargingStation?.siteArea?.accessControl) {
       // The access control is switched off - so billing checks are useless
       withBillingChecks = false;
     }
@@ -176,6 +177,7 @@ export default class UserService {
       // TODO - The ChargingStationID is optional but only for backward compatibility reasons - make it mandatory as soon as possible
       const chargingStation = await UtilsService.checkAndGetChargingStationAuthorization(req.tenant, req.user, filteredRequest.ChargingStationID, Action.READ,
         action, null, { withSiteArea: true });
+
       if (!chargingStation.siteArea.accessControl) {
         // The access control is switched off - so billing checks are useless
         withBillingChecks = false;

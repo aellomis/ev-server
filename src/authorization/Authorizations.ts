@@ -146,7 +146,7 @@ export default class Authorizations {
       }
     }
     let tenantHashID = Constants.DEFAULT_TENANT_ID;
-    let activeComponents = [];
+    let activeComponents = ['ocpi', 'refund', 'pricing', 'organization', 'statistics', 'analytics', 'billing', 'billingPlatform', 'asset', 'smartCharging', 'car', 'carConnector'];
     let tenantName;
     let tenantSubdomain;
     if (tenant.id !== Constants.DEFAULT_TENANT_ID) {

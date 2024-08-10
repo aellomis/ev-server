@@ -1221,13 +1221,13 @@ export default class OCPPUtils {
         message: 'The Tenant ID is mandatory!'
       });
     }
-    if (!DatabaseUtils.isObjectID(tenantID)) {
-      throw new BackendError({
-        action, chargingStationID,
-        module: MODULE_NAME, method: 'checkChargingStationOcppParameters',
-        message: `The Tenant ID '${tenantID}' is invalid!`
-      });
-    }
+    // if (!DatabaseUtils.isObjectID(tenantID)) {
+    //   throw new BackendError({
+    //     action, chargingStationID,
+    //     module: MODULE_NAME, method: 'checkChargingStationOcppParameters',
+    //     message: `The Tenant ID '${tenantID}' is invalid!`
+    //   });
+    // }
     // Check Token
     if (!tokenID) {
       throw new BackendError({

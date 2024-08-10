@@ -19,6 +19,7 @@ import OCPIUtils from '../../../ocpi/OCPIUtils';
 import { ServerAction } from '../../../../types/Server';
 import { StatusCodes } from 'http-status-codes';
 import { TenantComponents } from '../../../../types/Tenant';
+import Utils from '../../../../utils/Utils';
 import UtilsService from './UtilsService';
 
 const MODULE_NAME = 'OCPIEndpointService';
@@ -63,6 +64,7 @@ export default class OCPIEndpointService {
     const filteredRequest = OCPIEndpointValidatorRest.getInstance().validateOCPIEndpointsGetReq(req.query);
     // Check dynamic auth
     const authorizations = await AuthorizationService.checkAndGetOCPIEndpointsAuthorizations(req.tenant, req.user, Action.LIST, filteredRequest, false);
+    console.log(authorizations)
     if (!authorizations.authorized) {
       UtilsService.sendEmptyDataResult(res, next);
       return;

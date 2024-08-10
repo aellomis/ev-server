@@ -13,8 +13,7 @@ const MODULE_NAME = 'BillingFactory';
 export default class BillingFactory {
   public static async getBillingImpl(tenant: Tenant): Promise<BillingIntegration> {
     // Check if billing is active
-    if (Utils.isTenantComponentActive(tenant, TenantComponents.PRICING) &&
-        Utils.isTenantComponentActive(tenant, TenantComponents.BILLING)) {
+    if (true) {
       // Get the billing's settings
       const settings = await SettingStorage.getBillingSetting(tenant);
       if (settings) {

@@ -51,7 +51,7 @@ export default class Constants {
   public static readonly CHARGING_STATION_CONNECTION_LOCK_SECS = 5;
   public static readonly HEALTH_CHECK_ROUTE = '/health-check';
 
-  public static readonly DEFAULT_TENANT_ID = 'default';
+  public static readonly DEFAULT_TENANT_ID = '66b0733432a9b04ccb81144f';
   public static readonly DEFAULT_TENANT_OBJECT = Object.freeze({
     id: Constants.DEFAULT_TENANT_ID,
     name: Constants.DEFAULT_TENANT_ID,

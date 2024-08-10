@@ -806,6 +806,7 @@ export default class ChargingStationService {
       if (command === Command.REMOTE_START_TRANSACTION) {
         const remoteStartRequest = ChargingStationValidatorRest.getInstance().validateChargingStationActionTransactionStartReq(req.body);
         commandFound = true;
+        console.log(command);
         result = await ChargingStationService.executeChargingStationStartTransaction(
           action, chargingStation, command, remoteStartRequest, req, res, next, chargingStationClient);
       }

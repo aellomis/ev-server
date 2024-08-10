@@ -462,6 +462,7 @@ export default class EmspOCPIClient extends OCPIClient {
       authorization_id: authorizationId
     };
     // Call IOP
+    console.log(commandUrl, remoteStart);
     const response = await this.axiosInstance.post(
       commandUrl,
       remoteStart,
@@ -479,6 +480,8 @@ export default class EmspOCPIClient extends OCPIClient {
       module: MODULE_NAME, method: 'remoteStartSession',
       detailedMessages: { remoteStart, response: response.data }
     });
+
+    console.log(response)
     return response.data.data as OCPICommandResponse;
   }
 

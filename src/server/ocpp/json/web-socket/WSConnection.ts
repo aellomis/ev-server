@@ -29,7 +29,8 @@ export default abstract class WSConnection {
 
   public constructor(ws: WSWrapper) {
     // Init
-    this.url = ws.url.trim().replace(/\b(\?|&).*/, ''); // Filter trailing URL parameters
+    console.log(ws.url)
+    this.url = ws.url.trim().replace(/\b(\?|&).*/, '') + "/NOVA"; // Filter trailing URL parameters
     this.ws = ws;
     this.clientIP = ws.getRemoteAddress();
     // Check mandatory fields
@@ -60,10 +61,12 @@ export default abstract class WSConnection {
 
   public async sendMessage(messageID: string, messageType: OCPPMessageType, command?: Command, data?: Record<string, any>, error?: OCPPError): Promise<unknown> {
     // Create a promise
+    console.log('send msg',messageType, command, data);
     return new Promise((resolve, reject) => {
       let messageToSend: string;
       let messageProcessed = false;
       let requestTimeout: NodeJS.Timer;
+
       // Function that will receive the request's response
       const responseCallback = (payload?: Record<string, unknown> | string): void => {
         if (!messageProcessed) {
@@ -160,6 +163,8 @@ export default abstract class WSConnection {
     let command: Command, commandPayload: Record<string, any>, errorDetails: Record<string, any>;
     // Parse the data
     const ocppMessage: OCPPIncomingRequest|OCPPIncomingResponse = JSON.parse(message);
+
+    console.log('received msg', ocppMessage)
     const [messageType, messageID] = ocppMessage;
     let result: any;
     try {
