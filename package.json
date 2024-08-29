@@ -107,7 +107,7 @@
     "body-parser": "^1.20.0",
     "body-parser-xml": "^2.0.3",
     "busboy": "^1.6.0",
-    "chalk": "4.1.2",
+    "chalk": "5.3.0",
     "cors": "^2.8.5",
     "countries-list": "^2.6.1",
     "crypto-js": "^4.2.0",
