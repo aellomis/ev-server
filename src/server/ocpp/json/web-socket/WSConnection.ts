@@ -29,8 +29,15 @@ export default abstract class WSConnection {
 
   public constructor(ws: WSWrapper) {
     // Init
-    console.log(ws.url)
-    this.url = ws.url.trim().replace(/\b(\?|&).*/, '') + "/NOVA"; // Filter trailing URL parameters
+    const normalizedUrl = ws.url.trim().replace(/\b(\?|&).*/, '');
+    const splitUrl = normalizedUrl.split("-");
+    if (splitUrl.length > 1) {
+      this.url = `${splitUrl[0]}/66cfeb8430de8a9e2710eeae${splitUrl[1]}`
+    } else {
+      this.url = ws.url.trim().replace(/\b(\?|&).*/, ''); // Filter trailing URL parameters
+    }
+
+    console.log(this.url)
     this.ws = ws;
     this.clientIP = ws.getRemoteAddress();
     // Check mandatory fields
@@ -164,7 +171,7 @@ export default abstract class WSConnection {
     // Parse the data
     const ocppMessage: OCPPIncomingRequest|OCPPIncomingResponse = JSON.parse(message);
 
-    console.log('received msg', ocppMessage)
+    console.log('received msg', JSON.stringify(ocppMessage))
     const [messageType, messageID] = ocppMessage;
     let result: any;
     try {

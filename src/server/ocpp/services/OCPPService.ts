@@ -42,6 +42,8 @@ import TransactionStorage from '../../../storage/mongodb/TransactionStorage';
 import User from '../../../types/User';
 import UserStorage from '../../../storage/mongodb/UserStorage';
 import Utils from '../../../utils/Utils';
+import { VnpayBillingIntegration } from '../../../integration/billing/customs/VnpayBillingIntegration';
+import { ZalopayBillingIntegration } from '../../../integration/billing/customs/ZalopayBillingIntegration';
 import moment from 'moment';
 import momentDurationFormatSetup from 'moment-duration-format';
 
@@ -424,6 +426,7 @@ export default class OCPPService {
         }
       };
     } catch (error) {
+      console.log(error)
       this.addChargingStationToException(error, headers.chargeBoxIdentity);
       await Logging.logActionExceptionMessage(headers.tenantID, ServerAction.OCPP_START_TRANSACTION, error, { startTransaction });
       // Invalid
@@ -503,8 +506,10 @@ export default class OCPPService {
       this.checkAndUpdateTransactionWithSignedDataInStopTransaction(transaction, stopTransaction);
       // Update Transaction with Stop Transaction and Stop MeterValues
       OCPPUtils.updateTransactionWithStopTransaction(transaction, chargingStation, stopTransaction, user, alternateUser, tagID, isSoftStop);
-      // Bill
-      await BillingFacade.processStopTransaction(tenant, transaction, transaction.user);
+      // Billing
+      // await ZalopayBillingIntegration.getInstance(tenant).createOrder(transaction)
+      await VnpayBillingIntegration.getInstance(tenant).createOrder(transaction);
+      // await BillingFacade.processStopTransaction(tenant, transaction, transaction.user);
       // OCPI
       await OCPIFacade.processStopTransaction(tenant, transaction, chargingStation, chargingStation.siteArea, user, ServerAction.OCPP_STOP_TRANSACTION);
       // OICP
@@ -534,6 +539,7 @@ export default class OCPPService {
         }
       };
     } catch (error) {
+      console.log(error)
       this.addChargingStationToException(error, headers.chargeBoxIdentity);
       await Logging.logActionExceptionMessage(headers.tenantID, ServerAction.OCPP_STOP_TRANSACTION, error, { stopTransaction });
       // Invalid

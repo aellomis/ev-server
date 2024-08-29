@@ -247,6 +247,18 @@ export interface BillingSettings extends Setting {
   stripe?: StripeBillingSetting;
 }
 
+export interface ZalopaySettings {
+  appid: string;
+  key1: string;
+  key2: string
+}
+
+export interface VnpaySettings {
+  tmnCode: string;
+  secretKey: string;
+  vnpUrl: string
+}
+
 export interface BillingSetting {
   isTransactionBillingActivated: boolean;
   immediateBillingAllowed: boolean;
@@ -264,6 +276,14 @@ export interface StripeBillingSetting {
 
 export enum BillingContentType {
   STRIPE = 'stripe',
+}
+
+export enum ZalopayAPIs {
+  CREATE_ORDER = 'https://sb-openapi.zalopay.vn/v2/create'
+}
+
+export enum VnpayAPIs {
+  CREATE_ORDER = ''
 }
 
 export interface AssetSettings extends Setting {

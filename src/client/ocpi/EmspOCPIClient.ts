@@ -480,8 +480,6 @@ export default class EmspOCPIClient extends OCPIClient {
       module: MODULE_NAME, method: 'remoteStartSession',
       detailedMessages: { remoteStart, response: response.data }
     });
-
-    console.log(response)
     return response.data.data as OCPICommandResponse;
   }
 

@@ -133,6 +133,7 @@ export default class StatisticsStorage {
     const chargingStationStatsMDB = await global.database.getCollection<any>(tenant.id, 'transactions')
       .aggregate<any>(aggregation, DatabaseUtils.buildAggregateOptions())
       .toArray() as ChargingStationStats[];
+    console.log(chargingStationStatsMDB)
     await Logging.traceDatabaseRequestEnd(tenant, MODULE_NAME, 'getChargingStationStats', startTime, aggregation, chargingStationStatsMDB);
     return chargingStationStatsMDB;
   }
