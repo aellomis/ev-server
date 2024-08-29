@@ -196,7 +196,7 @@
     "@types/jsonstream": "^0.8.30",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/lodash": "^4.14.186",
-    "@types/moment-duration-format": "^2.2.3",
+    "@types/moment-duration-format": "^2.2.6",
     "@types/moment-timezone": "^0.5.30",
     "@types/mongo-sanitize": "^1.0.1",
     "@types/mustache": "^4.2.1",
