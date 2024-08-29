@@ -30,7 +30,7 @@ export default abstract class WSConnection {
   public constructor(ws: WSWrapper) {
     // Init
     const normalizedUrl = ws.url.trim().replace(/\b(\?|&).*/, '');
-    const splitUrl = normalizedUrl.split("-");
+    const splitUrl = normalizedUrl.split("+");
     if (splitUrl.length > 1) {
       this.url = `${splitUrl[0]}/66cfeb8430de8a9e2710eeae${splitUrl[1]}`
     } else {
